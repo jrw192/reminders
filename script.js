@@ -9,7 +9,7 @@ onClick = (event) => {
 	    scene.remove(scene.children[0]); 
 	}
 	makeText(phrase);
-
+	// setButton();
 	makeAllMinor();
 	render();
 }
@@ -76,10 +76,10 @@ function readTextFile(file)
 readTextFile('words.txt');
 
 function makeText(phrase) {
-	console.log("boop")
+	console.log("boop");
 	loader.load( './ms_yahei_regular.json', function ( font ) {
 
-		var geometry = new THREE.TextGeometry( phrase, {
+		geometry = new THREE.TextGeometry( phrase, {
 			font: font,
 			size: 20,
 			height: 2,
@@ -133,49 +133,6 @@ function makeMinorText(phrase, x, y, z) {
 	}
 	this.init();
 
-	this.move = () => {
-		let x = mesh.position.x,
-			y = mesh.position.y;
-		let dX = direction.x,
-			dY = direction.y;
-
-		var magnitude = Math.sqrt( (dX*dX) + (dY*dY) );
-		newX = x + dX * 1.3 / magnitude;
-		newY = y + dY * 1.3 / magnitude;
-
-		mesh.position.set(newX, newY, z);
-
-		var frustum = new THREE.Frustum();
-		frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse)); 
-
-		//change fish direction when fish reaches edge of pond
-		var pos = new THREE.Vector3(mesh.position.x + 5, mesh.position.y + 5, 0);
-		if (Math.abs(pos.x) > 200) {
-			console.log("x limit");
-			let randX = Math.random() * 0.4,
-				randY = Math.random() * 3;
-			randX = [-randX, randX][Math.floor(Math.random()) * 2];
-			randY = [-randY, randY][Math.floor(Math.random()) * 2];
-			console.log(randX,randY);
-
-
-			direction.x = -direction.x + randX;
-			//direction.y = direction.y + randY;
-
-		}
-		if (Math.abs(pos.y) > 200) {
-			console.log("y limit");
-			let randX = Math.random() * 3,
-				randY = Math.random() * 0.4;
-			randX = [-randX, randX][Math.floor(Math.random()) * 2];
-			randY = [-randY, randY][Math.floor(Math.random()) * 2];
-			console.log(randX,randY);
-
-			//direction.x = direction.x + randX;
-			direction.y = -direction.y + randY;
-		}
-
-	}
 }
 
 var xVals = [];
@@ -184,7 +141,7 @@ var smols = [];
 
 for(i= 0-text.length; i<text.length;i++) {
 	xVals.push(i*12);
-	yVals.push(i*11);
+	yVals.push(i*10);
 }
 
 console.log(xVals);
@@ -195,20 +152,34 @@ function makeAllMinor() {
 		if(text[i] !== curPhrase) {
 			let x = xTemp[Math.floor(Math.random() * xTemp.length)];
 			let y = yTemp[Math.floor(Math.random() * yTemp.length)];
-			// let xInd = xTemp.indexOf(x),
-			// 	yInd = yTemp.indexOf(y);
-			// if(xInd > -1)
-			// 	xTemp.splice(xInd, 1);
-			// if(yInd > -1)
-			// 	yTemp.splice(yInd, 1);
 			smols[i] = new makeMinorText(text[i], x, y, -10);
 		}
 	}
 }
 
+function setButton() {
+	switch(curPhrase) {
+		case "吃饭了吗?":
+			document.getElementById("button").innerHTML = "吃了";
+			break;
+		case "回家了吗?":
+			document.getElementById("button").innerHTML = "回家了";
+			break;
+		default:
+			document.getElementById("button").innerHTML = "好";
+			break;
+
+
+	}
+	
+
+}
+
 function render() {
 	requestAnimationFrame(render);
 	renderer.render( scene, camera );
+	//window.setTimeout(setButton(), 5000)
+	setButton();
 }
 
 function init() {
@@ -216,6 +187,7 @@ function init() {
 	makeText(curPhrase);
 	makeAllMinor();
 	render();
+	// setButton();
 	console.log("hello")
 }
 init(); //initializes at beginning
