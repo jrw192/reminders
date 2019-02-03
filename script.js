@@ -9,7 +9,7 @@ onClick = (event) => {
 	    scene.remove(scene.children[0]); 
 	}
 	makeText(phrase);
-	// setButton();
+	setButton();
 	makeAllMinor();
 	render();
 }
@@ -179,7 +179,6 @@ function render() {
 	requestAnimationFrame(render);
 	renderer.render( scene, camera );
 	//window.setTimeout(setButton(), 5000)
-	setButton();
 }
 
 function init() {
@@ -187,7 +186,7 @@ function init() {
 	makeText(curPhrase);
 	makeAllMinor();
 	render();
-	// setButton();
+	setButton();
 	console.log("hello")
 }
 init(); //initializes at beginning
