@@ -96,7 +96,10 @@ function makeText(phrase) {
 	var mesh = new THREE.Mesh(geometry, material);
 	var edges = new THREE.EdgesHelper(mesh, 'grey');
 	mesh.add(edges);
-	mesh.position.set(-50, -10, 0);
+	if(phrase.length === 4)
+		mesh.position.set(-55, -10, 0);
+	else if(phrase.length === 5)
+		mesh.position.set(-60, -10, 0)
 	scene.add(mesh);
 	scene.add( light );
 	//return mesh;
