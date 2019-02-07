@@ -2,6 +2,7 @@ function onClick() {
 	ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 	makeMain();
 	makeAllMinor();
+	setButton();
 }
 
 var button = document.getElementById("button");
@@ -52,6 +53,33 @@ function makeMain()
 
 makeMain();
 
+function setButton() {
+	switch(curPhrase) {
+		case "吃饭了吗?":
+			document.getElementById("button").innerHTML = "吃了";
+			break;
+		case "回家了吗?":
+			document.getElementById("button").innerHTML = "回家了";
+			break;
+		default:
+			document.getElementById("button").innerHTML = "好";
+			break;
+	}
+	switch (document.getElementById("button").innerHTML.length) {
+		case 2:
+			document.getElementById("button").style.marginLeft = "42%";
+			break;
+		case 3:
+			document.getElementById("button").style.marginLeft = "41%";
+			break;
+		default:
+			document.getElementById("button").style.marginLeft = "43%";
+			break;
+	}
+	 
+}
+setButton();
+
 
 var xVals = [];
 var yVals = [];
@@ -91,5 +119,7 @@ function makeAllMinor() {
 		}
 	}
 }
+
+
 
 makeAllMinor();
