@@ -31,7 +31,7 @@ phrases = [
 	'别忘记了'
 ]
 
-var width = window.innerWidth/2 - 250
+var width = window.innerWidth/2 - 210
 var height = window.innerHeight/2
 console.log(width, height)
 
